@@ -6,6 +6,8 @@ This code was tested on Python 3.10.6 with PyTorch 2.0.0. Other packages can be 
 ```bash
 pip install -r requirements.txt
 ```
+
+The dataset used for training, validtion, and testing is [ASV-Spoof2019](https://datashare.ed.ac.uk/handle/10283/3336).
 ## Train Model
 
 To train a model run the command 
