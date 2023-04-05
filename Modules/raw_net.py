@@ -120,8 +120,7 @@ class RawNet(nn.Module):
             self.res_blocks.append(ResidualBlock(channels[1], channels[1]))
         self.norm2 = nn.BatchNorm1d(channels[1])
         self.recurrent = nn.GRU(channels[1], gru_node, n_gru_layers, batch_first=True)
-        self.fc1 = nn.Linear(gru_node, gru_node)
-        self.fc2 = nn.Linear(gru_node, 2, bias=True)
+        self.fc_out = nn.Linear(gru_node, 2, bias=True)
         return
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
@@ -135,4 +134,5 @@ class RawNet(nn.Module):
         self.recurrent.flatten_parameters()
         out = self.recurrent(out.permute(0, 2, 1))[0]
         out = out[:, -1, :]
+        out = self.fc_out(out)
         return out
